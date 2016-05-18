@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>What's my API String?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable = yes">
+<!-- <meta name="viewport" content="user-scalable = yes"> -->
+<style>
+	html {
+		-webkit-text-size-adjust: none;
+	}
+	body {
+		margin: 0 auto;
+		width: 318px;
+		max-width: 318px;
+		min-width: 318px;
+		position:relative;
+		right: 1px;
+		/* These two settings remove the white border next to the header. */
+		left: 1px;
+		color: black;
+		font-size: 16px;
+		font-family: arial, helvetica, serif;
+		line-height: 1;
+    	text-align: left;
+		background-color: white;		
+	}
+	h1 {
+		color: black;
+		font-size: 26px;
+		font-family: arial, helvetica, serif;
+		line-height: 1.2;
+    	text-align: left;
+    	margin: 0px;
+    	padding: 0px;
+    	border: 0px;
+    	border-style: solid;
+    	border-width: 0px;
+    	border-top-width: 0px;
+    	border-left-width: 0px;
+    	border-right-width: 0px;
+    	border-color: grey;
+    	background-color: white;
+		}
+	h2 {
+		color: black;
+		font-size: 24px;
+		font-family: arial, helvetica, serif;
+		line-height: 1.2;
+    	text-align: left;
+    	margin: 0px;
+    	padding: 0px;
+    	margin-left: 0px;
+    	margin-right: 0px;
+    	margin-top: 0px;
+		border-color: yellow;
+    	border-style: solid;
+    	border-width: 0px;
+    	border-top-width: 0px;
+    	border-left-width: 0px;
+    	border-right-width: 0px;
+    	border-bottom-width: 0px;
+    	background-color: lightblue; /*595959;*/
+		}
+	input[type="number"] {
+		color: black;
+   		width: 38px;
+  		font-size: 16px;
+		text-align: right;
+		border: 0px;
+		background-color: white;
+		-webkit-appearance: none;
+		-moz-appearance:textfield;
+	}
+	input[type="text"] {
+		color: black;
+   		width: 18px;
+  		font-size: 16px;
+		text-align: left;
+		border: 0px;
+		background-color: white;
+		position: relative;
+		display: inline-block;
+		-webkit-appearance: none;
+		-moz-appearance:textfield;
+		
+	}
+	input[type=number]::-webkit-inner-spin-button, 
+	input[type=number]::-webkit-outer-spin-button { 
+		-webkit-appearance: none; 
+		margin: 0; 
+	}
+	input:invalid {
+		-moz-box-shadow: none;
+	}
+	input:required {
+		box-shadow:none;
+	}
+	input[type="checkbox"] {
+		color: black;
+  		font-size: 16px;
+		text-align: right;
+		border: 0px;
+		background-color: white;
+		-webkit-appearance: none;
+	}
+	select {
+		color: black;
+		width: 100px;
+		font-size: 16px;
+		border: 0px;
+	}
+    p {
+        color: black;
+        font-size: 20px;
+        font-family: arial, helvetica, serif;
+    	line-height: 1.2;
+    	text-align: left;
+    	margin-top: 7px;
+    	margin-bottom: 7px;
+    }
+    span {
+        color: black;
+        font-size: 12px;
+        font-family: arial, helvetica, serif;
+    	line-height: 1;
+    	text-align: left;
+    	padding-left: 0px;
+    }
+	div {
+		width: 318px;
+		height: -1px;
+		padding: 0px;
+		border: 1px solid grey;
+		margin: 0px;
+	}
+    button {
+    	font-size: 16px;
+		color: black;
+		background-color: white;
+		border: 0px;
+		-webkit-appearance: none;
+    }
+    small {
+    	width: 150px;
+    	color: grey;
+    }
+</style>
+</head><body onload="LoadForm()">
+<h1>What's my API String?</h1>
+<h2>My Nightscout</h2>
+<label name="SiteLabel">Site address: </label><input type="text" id="Site" value="" onkeyup="CalcAPI()" style="width:210px;"><br>
+<label name="SecretLable">Secret: </label><input type="text" id="Secret" value="" onkeyup="CalcAPI()" style="width:260px;"><br>
+<h2>Result</h2>
+<input type="text" id="API" value="" style="width:310px;" onfocus = "SelectAll(this)"><br>
+<small><br>v0.0.1</small><small id="time"></small>
+
+<script>
+
+function CalcAPI() {     
+	 var Site = document.getElementById("Site").value;
+	 var Secret = document.getElementById("Secret").value;
+	 var API = [];
+	 
+	 Site = Site.replace("/pebble","").replace("//","").replace("/","").replace("https:","").replace("http:","").replace("www.","");
+	 
+	document.getElementById("API").value = APIString(Site, Secret);
+	 
+ }
+
+ function APIString(Site, Secret) {
+	return "https://" + Secret + "@" + Site + "/api/v1/"
+ }
+
+ function SelectAll(Element){
+	var Input = document.getElementById(Element.id);
+	Input.setSelectionRange(0, 9999);
+}
+ 
+</script>
+
+
+</body></html>
